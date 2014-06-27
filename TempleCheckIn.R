@@ -1,8 +1,8 @@
 if (!require(XML)) install.packages("XML")
 setwd("/Users/wangze-hao/Desktop/TaiwanTemple")
 
-# original file name : "temple.xml"
-templeOfficial <- xmlParse("temple_shorter.xml")
+# original file name : "temple.xml" or "temple_shorter.xml"
+templeOfficial <- xmlParse("temple.xml")
 xml_data <- xmlToList(templeOfficial)
 
 tem_name <- NULL
