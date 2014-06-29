@@ -1,8 +1,9 @@
+setwd("/Users/Salmon/Academia Sinica/TaiwanTemple")
 if (!require(XML)) install.packages("XML")
-setwd("/Users/wangze-hao/Desktop/TaiwanTemple")
+library(XML)
 
 # original file name : "temple.xml" or "temple_shorter.xml"
-templeOfficial <- xmlParse("temple.xml")
+templeOfficial <- xmlParse("temple_shorter.xml")
 xml_data <- xmlToList(templeOfficial)
 
 tem_name <- NULL
@@ -30,8 +31,28 @@ for (i in 1:length(xml_data)) {
 templeOfficalDatasets <- data.frame(tem_name, tem_local, tem_relig)
 print(templeOfficalDatasets)
 
-# install 'RODBC' package to read mdb
-if (!require(RODBC)) install.packages("RODBC")
+
+if (!require(ggplot2)) install.packages("ggplot2")
+if (!require(ggmap)) install.packages("ggmap")
+library(ggplot2)
+library(ggmap)
+
+# source = c("google", "osm", "stamen", "cloudmade")
+# maptype = c("terrain", "satellite", "roadmap", "hybrid", "toner", "watercolor")
+Taiwan_Map <- get_map(location = c(lon = 121.083179, lat = 23.723355), color = "color", source = "google", maptype = "roadmap", zoom = 7, scale = 2)
+Taiwan_Map <- ggmap(Taiwan_Map, extent = "panel", ylab = "Latitude", xlab = "Longitude")
+
+
+
+FB_checkins <- read.csv("20130904.csv", header = TRUE, sep = ",")
+
+Taiwan_Map + geom_point(aes(x=FB_checkins$longitude, y=FB_checkins$latitude))
+
+
+if (!require(shiny)) install.packages("shiny")
+library(shiny)
+
+runApp("/Users/Salmon/Academia Sinica/TaiwanTemple/shinyApp")
 
 
 
