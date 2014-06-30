@@ -14,16 +14,18 @@ shinyUI(fluidPage(
   sidebarLayout(
     sidebarPanel(
       dateRangeInput("date",
-                  "Date range.",
-                  start="2014-01-01",
-                  end="2014-01-31",
-                  min="2012-03-01",
-                  max="2014-03-30")
+                     "Date range.",
+                     start = "2014-01-01",
+                     end = "2014-01-31",
+                     min = "2012-03-01",
+                     max = "2014-03-30",
+                     separator = "~"),
+      submitButton("Submit")
     ),
     
     # Show a plot of the generated distribution
     mainPanel(
-      htmlOutput("TaiwanMap")
+      plotOutput("TaiwanMap", height = "500px")
     )
   )
 ))
